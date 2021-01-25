@@ -1,16 +1,24 @@
-﻿
+﻿@model Employee
 
-<h1>@ViewData["PageTitle"]</h1>
-<h1>Details</h1>
 @{
-    var employee = ViewData["Employee"] as EmployeeManagement.Models.Employee;
- }
-<div>
-    Name : @employee.Name
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Employee Details";
+}
+
+
+<h1>@ViewBag.PageTitle</h1>
+
+
+<div class="card">
+    <div class="card-body">
+        <img src="~/images/banner.jpg" class="card-img-top" alt="..." asp-append-version="true" style="width:500px;height:300px;">
+        <h5 class="card-title">Emplyee Name: @Model.Name</h5>
+        <p class="card-text">Emplyee Department: @Model.Department</p>
+        <p class="card-text">Emplyee Department: @Model.Email</p>
+        <p class="card-text">Emplyee Id: @Model.Id</p>
+        <a asp-controller="home" asp-action="index" class="btn btn-primary">Back</a>
+        <a href="#" class="btn btn-primary">Edit</a>
+        <a href="#" class="btn btn-primary">Delete</a>
     </div>
-<div>
-    Email : @employee.Email
 </div>
-<div>
-    Department : @employee.Department
-</div>
+

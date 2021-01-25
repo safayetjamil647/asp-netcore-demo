@@ -15,17 +15,29 @@ namespace EmployeeManagement.Controllers
             _employeeRepository = new MockEmployeeRepository();
         }
 
-        public string Index ()
+        public ViewResult Index ()
         {
-            return _employeeRepository.GetEmployee(1).Name;
+            var model = _employeeRepository.GetAllEmployee();
+            return View(model);
         }
-        public ViewResult Details()
+        public ViewResult Details(int id)
         {
-            Employee model = _employeeRepository.GetEmployee(1);
-            ViewData["Employee"] = model;
-            ViewData["PageTitle"]= "Employee Details";
-            return View();
+            Employee model = _employeeRepository.GetEmployee(id);
+            
+            ViewBag.PageTitle= "Employee Details";
+            return View(model);
 
+        }
+        [HttpGet]
+        public ViewResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public RedirectToActionResult Create(Employee employee)
+        {
+            Employee newEmployee = _employeeRepository.Add(employee);
+            return RedirectToAction("details", new { id = newEmployee.Id });
         }
     }
 }
